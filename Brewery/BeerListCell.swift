@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class BearListCell : UITableViewCell {
-    let bearImageView = UIImageView()
+class BeerListCell : UITableViewCell {
+    let beerImageView = UIImageView()
     let nameLabel = UILabel()
     let taglineLabel = UILabel()
     
@@ -18,11 +18,11 @@ class BearListCell : UITableViewCell {
         super.layoutSubviews()
         
         //ContentView 에 Add 시켜주기.
-        [bearImageView, nameLabel, taglineLabel].forEach{
+        [beerImageView, nameLabel, taglineLabel].forEach{
             contentView.addSubview($0)
         }
         
-        bearImageView.contentMode = .scaleAspectFit
+        beerImageView.contentMode = .scaleAspectFit
         
         nameLabel.font = .systemFont(ofSize: 18, weight : .bold)
         nameLabel.numberOfLines = 2
@@ -32,17 +32,17 @@ class BearListCell : UITableViewCell {
         taglineLabel.numberOfLines = 0
         
         //bearImageView AutoLayout
-        bearImageView.snp.makeConstraints {
+        beerImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.trailing.bottom.equalToSuperview().inset(20)
+            $0.leading.top.bottom.equalToSuperview().inset(20)
             $0.width.equalTo(80)
             $0.height.equalTo(120)
             
         }
         //nameLabel AutoLayout
         nameLabel.snp.makeConstraints {
-            $0.leading.equalTo(bearImageView.snp.trailing).offset(10)
-            $0.bottom.equalTo(bearImageView.snp.centerY)
+            $0.leading.equalTo(beerImageView.snp.trailing).offset(10)
+            $0.bottom.equalTo(beerImageView.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
         }
         
@@ -51,7 +51,16 @@ class BearListCell : UITableViewCell {
             $0.leading.trailing.equalTo(nameLabel)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
+    }
+    func configure(with beer: Beer) {
+        let imageURL = URL(string: beer.imageUrl ?? "")
+        beerImageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "beer_icon"))
+        nameLabel.text = beer.name ?? "이름 없는 맥주"
+        taglineLabel.text = beer.tagLine
         
-        
+        //셀의 오른쪽에 > 모양이 생김
+        accessoryType = .disclosureIndicator
+        //셀을 클릭해도 음영이 발생하지 않음
+        selectionStyle = .none
     }
 }

@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         self.window = UIWindow(windowScene: windowScene)
         
-        let rootViewController = BearListViewController()
+        let rootViewController = BeerListViewController()
         let rootNavigationController = UINavigationController(rootViewController: rootViewController)
         
         self.window?.rootViewController = rootNavigationController

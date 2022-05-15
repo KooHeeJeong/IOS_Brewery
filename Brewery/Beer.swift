@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Bear: Decodable {
+struct Beer: Decodable {
     
     let id : Int?
     let name, taglineString, description, brewersTips, imageUrl : String?
-    let foodParing : [String]?
+    let foodPairing : [String]?
     
     var tagLine: String {
         let tags = taglineString?.components(separatedBy: ". ")
@@ -31,6 +31,6 @@ struct Bear: Decodable {
         case taglineString = "tagline"
         case imageUrl = "image_url"
         case brewersTips = "brewers_tips"
-        case foodParing = "food_pairing"
+        case foodPairing = "food_pairing"
     }
 }
